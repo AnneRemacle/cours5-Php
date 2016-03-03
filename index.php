@@ -28,7 +28,14 @@ Pour exécuter des req sql avec php, différentes fonctions sont disponibles:
 la classe PDO qui représente la connexion
 PDOStatement pour les requêtes
 */
-
-
     include( 'book.php' );
+    if( isset( $_GET[ 'id' ] ) ) {
+        $id = intval( $_GET[ 'id' ] ); // intval => pour être sûr qu'on ait un entier
+        $book = getBook( $id );
+        $view = 'singlebook.php';
+    } else {
+        $books = getBooks();
+        $view = 'allbooks.php';
+    }
+
     include( 'view.php' );
