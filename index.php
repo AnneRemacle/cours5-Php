@@ -29,10 +29,16 @@ la classe PDO qui représente la connexion
 PDOStatement pour les requêtes
 */
 
+    include( 'routes.php' );
 
     $a = isset( $_REQUEST[ 'a' ] ) ? $_REQUEST[ 'a' ] : 'index'; // request = méta tableau qui regroupe get et post
     $e = isset( $_REQUEST[ 'e' ] ) ? $_REQUEST[ 'e' ] : 'books'; // par défaut, la page qui va s'afficher est la liste des livres
     // on teste si il y a un paramètre a ou un paramètre e dans l'url
+
+    if( !in_array( $a .'_' . $e , $routes ) ) {
+        die( 'Cette route n’est pas permise' );
+    }
+    
     include( 'controllers/' . $e . 'Controller.php' );
 
 
