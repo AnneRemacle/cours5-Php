@@ -2,7 +2,7 @@
     $dbConfig = parse_ini_file( 'db.ini' );
 
     try {
-        $dsn = sprintf( 'mysql:host=%s; dbname=%s', $dbConfig[ 'host' ], $dbConfig[ 'dbname' ] );
+        $dsn = sprintf( '%s:host=%s; dbname=%s', $dbConfig[ 'driver' ], $dbConfig[ 'host' ], $dbConfig[ 'dbname' ] );
 
         $cn = new PDO( $dsn, $dbConfig[ 'username' ], $dbConfig[ 'password' ] );
         // on vient de créer une connexion à la base de données
@@ -18,3 +18,12 @@ Pour exécuter des req sql avec php, différentes fonctions sont disponibles:
 la classe PDO qui représente la connexion
 PDOStatement pour les requêtes
 */
+
+    $booksStmnt = 'SELECT * FROM books';
+    // on stocke la requête dans une variable
+    $pdoStmnt = $cn -> query( $booksStmnt );
+    $books = $pdoStmnt -> fetchAll();
+
+    foreach( $books as $book ) {
+        echo $book[ 'title' ].'<br>';
+    }
