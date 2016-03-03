@@ -1,3 +1,5 @@
+<!-- Main view -->
+
 <!DOCTYPE html>
     <html lang="fr">
         <head>
@@ -5,6 +7,6 @@
             <title></title>
         </head>
         <body>
-            <?php include( $view ); ?>
+            <?php include( $datas[ 'view' ] ); ?>
         </body>
     </html>

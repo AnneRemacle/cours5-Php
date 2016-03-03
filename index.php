@@ -20,7 +20,7 @@
         $cn -> query( 'SET NAMES UTF8' );
         // on définit que le jeu de caractères utilisés pour les échanges entre la base de données et PDO est bien UTF8
     } catch( PDOException $e ) { // on attrape l'exception dans une variable e qui contient l'erreur produite
-        echo $e -> getMessage(); // quand on a un objet, pour accéder à ses propriétés ou méthodes publiques, on utilise une ->
+        die( $e -> getMessage() ); // quand on a un objet, pour accéder à ses propriétés ou méthodes publiques, on utilise une ->
     }
 // le script est maintenant connecté à la base de données.
 /*
@@ -28,14 +28,15 @@ Pour exécuter des req sql avec php, différentes fonctions sont disponibles:
 la classe PDO qui représente la connexion
 PDOStatement pour les requêtes
 */
-    include( 'book.php' );
-    if( isset( $_GET[ 'id' ] ) ) {
-        $id = intval( $_GET[ 'id' ] ); // intval => pour être sûr qu'on ait un entier
-        $book = getBook( $id );
-        $view = 'singlebook.php';
-    } else {
-        $books = getBooks();
-        $view = 'allbooks.php';
-    }
 
-    include( 'view.php' );
+
+    $a = isset( $_REQUEST[ 'a' ] ) ? $_REQUEST[ 'a' ] : 'index'; // request = méta tableau qui regroupe get et post
+    $e = isset( $_REQUEST[ 'e' ] ) ? $_REQUEST[ 'e' ] : 'books'; // par défaut, la page qui va s'afficher est la liste des livres
+    // on teste si il y a un paramètre a ou un paramètre e dans l'url
+    include( 'controllers/' . $e . 'Controller.php' );
+
+
+    $datas = call_user_func( $a );
+
+
+    include( 'views/view.php' );
