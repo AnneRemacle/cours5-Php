@@ -1,10 +1,20 @@
 <?php
     $dbConfig = parse_ini_file( 'db.ini' );
+    $PDOOptions = [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ];
+    /*
+    :: = quand on crée une classe on le fait avec le mot clé class. Dans cette classe on définit fonctions et propriétés.
+    Quand on fait un new, si on veut accéder à une prop, on fait -> qui permet d'accéder à une instance.
+    Il peut exister à l'intérieur de la classe des prop statiques (on ne peut les utiliser que directement depuis la classe et pas à travers une instance. Dans ce cas, on doit utiliser la classe elle-même (ici PDO)::titi )
+    L'intérêt des valeurs statiques est qu'elles sont partagées par plusieurs instances, contrairement aux autres qui sont propres à chaque instance.
+    */
 
     try {
         $dsn = sprintf( '%s:host=%s; dbname=%s', $dbConfig[ 'driver' ], $dbConfig[ 'host' ], $dbConfig[ 'dbname' ] );
 
-        $cn = new PDO( $dsn, $dbConfig[ 'username' ], $dbConfig[ 'password' ] );
+        $cn = new PDO( $dsn, $dbConfig[ 'username' ], $dbConfig[ 'password' ], $PDOOptions );
         // on vient de créer une connexion à la base de données
         $cn -> query( 'SET CHARACTER SET UTF8' );
         $cn -> query( 'SET NAMES UTF8' );
@@ -19,11 +29,6 @@ la classe PDO qui représente la connexion
 PDOStatement pour les requêtes
 */
 
-    $booksStmnt = 'SELECT * FROM books';
-    // on stocke la requête dans une variable
-    $pdoStmnt = $cn -> query( $booksStmnt );
-    $books = $pdoStmnt -> fetchAll();
 
-    foreach( $books as $book ) {
-        echo $book[ 'title' ].'<br>';
-    }
+    include( 'book.php' );
+    include( 'view.php' );
