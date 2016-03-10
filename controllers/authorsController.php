@@ -1,20 +1,30 @@
 <?php
 
-    function index() {
-        include( 'models/' . $GLOBALS[ 'e' ] . '.php' );
-        $data[ 'authors' ] = getAuthors();
-        $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
-        return $data;
-    }
+    class AuthorsController {
+        private $authors_model = null;
 
-    function show() {
-        if( isset( $_GET[ 'id' ] ) ) {
-            $id = intval( $_GET[ 'id' ] ); // intval => pour être sûr qu'on ait un entier
-            include( 'models/' . $GLOBALS[ 'e' ] . '.php' );
-            $data[ 'author' ] = getAuthor( $id );
+        public function __construct() {
+            $this -> authors_model = new Authors();
+        }
+
+        public function index() {
+
+            $data[ 'page_title' ] = 'ebooks - liste des auteurs';
+            $data[ 'authors' ] = $this -> authors_model -> getAuthors();
             $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
             return $data;
-        } else {
-            die( 'Il manque l’id' );
+        }
+
+        public function show() {
+            if( isset( $_GET[ 'id' ] ) ) {
+                $id = intval( $_GET[ 'id' ] ); // intval => pour être sûr qu'on ait un entier
+
+                $data[ 'page_title' ] = 'ebooks - fiche de' . $data[ 'author' ] -> name;
+                $data[ 'author' ] = $this -> authors_model -> getAuthor( $id );
+                $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
+                return $data;
+            } else {
+                die( 'Il manque l’id' );
+            }
         }
     }

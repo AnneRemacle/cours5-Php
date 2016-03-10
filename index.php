@@ -1,4 +1,10 @@
 <?php
+    set_include_path( __DIR__ . '/controllers' . PATH_SEPARATOR . __DIR__ . '/models' . PATH_SEPARATOR . get_include_path() );
+
+    spl_autoload_register( function( $class ) {
+        include( $class . '.php' ); // on fait un include d'un fichier sur base du nom du fichier
+    } );
+
     $dbConfig = parse_ini_file( 'db.ini' );
     $PDOOptions = [
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
@@ -39,10 +45,10 @@ PDOStatement pour les requêtes
         die( 'Cette route n’est pas permise' );
     }
 
-    include( 'controllers/' . $e . 'Controller.php' );
+    $controller_name = ucfirst( $e ) . 'Controller'; // ucfirst met en uppercase la premiere lettre
+    $controller = new $controller_name();
 
-
-    $datas = call_user_func( $a );
+    $datas = call_user_func( [ $controller, $a ] );
     // on trouve les deux clés créées dans indexBooks dans $datas
 
     include( 'views/view.php' );
