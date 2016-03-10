@@ -10,7 +10,7 @@
         public function index() {
 
             $data[ 'page_title' ] = 'ebooks - liste des éditeurs';
-            $data[ 'editors' ] = $this -> editors_model -> getEditors();
+            $data[ 'editors' ] = $this -> editors_model -> getRows();
             $data[ 'view' ] = 'views/indexEditors.php';
             return $data;
         }
@@ -21,7 +21,7 @@
                 if( $id == 0 ) {
                     die( 'l’éditeur demandé nexiste pas' );
                 }
-                $data[ 'editor' ] = $this -> editors_model -> getEditor( $id );
+                $data[ 'editor' ] = $this -> editors_model -> getRow( $id );
                 $data[ 'page_title' ] = 'ebooks - fiche de' . $data[ 'editor' ] -> name;
                 $data[ 'view' ] = 'views/showEditors.php';
                 return $data;

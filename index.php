@@ -4,7 +4,7 @@
     spl_autoload_register( function( $class ) {
         include( $class . '.php' ); // on fait un include d'un fichier sur base du nom du fichier
     } );
-
+//de là
     $dbConfig = parse_ini_file( 'db.ini' );
     $PDOOptions = [
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
@@ -28,6 +28,7 @@
     } catch( PDOException $e ) { // on attrape l'exception dans une variable e qui contient l'erreur produite
         die( $e -> getMessage() ); // quand on a un objet, pour accéder à ses propriétés ou méthodes publiques, on utilise une ->
     }
+// à de là
 // le script est maintenant connecté à la base de données.
 /*
 Pour exécuter des req sql avec php, différentes fonctions sont disponibles:
@@ -48,7 +49,7 @@ PDOStatement pour les requêtes
     $controller_name = ucfirst( $e ) . 'Controller'; // ucfirst met en uppercase la premiere lettre
     $controller = new $controller_name();
 
-    $datas = call_user_func( [ $controller, $a ] );
-    // on trouve les deux clés créées dans indexBooks dans $datas
+    $datas = call_user_func( [ $controller, $a ] ); // on donne un contexte à $a pour qu'elle fonctionne
+
 
     include( 'views/view.php' );
