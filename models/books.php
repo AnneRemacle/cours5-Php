@@ -1,9 +1,9 @@
 <?php
     function getBooks() {
-        $booksStmnt = 'SELECT * FROM books';
+        $booksStmnt = 'SELECT * FROM books'; // on fait une requête
         // on stocke la requête dans une variable
-        $pdoStmnt = $GLOBALS[ 'cn' ] -> query( $booksStmnt );
-        return $pdoStmnt -> fetchAll();
+        $pdoStmnt = $GLOBALS[ 'cn' ] -> query( $booksStmnt ); // on exécute la requête
+        return $pdoStmnt -> fetchAll(); // crée un tableau d'objets avec ≠ infos
     }
     function getBook( $id ) {
         $bookSql = 'SELECT * FROM books WHERE id= :id';

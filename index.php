@@ -16,8 +16,8 @@
 
         $cn = new PDO( $dsn, $dbConfig[ 'username' ], $dbConfig[ 'password' ], $PDOOptions );
         // on vient de créer une connexion à la base de données
-        $cn -> query( 'SET CHARACTER SET UTF8' );
-        $cn -> query( 'SET NAMES UTF8' );
+        $cn -> exec( 'SET CHARACTER SET UTF8' );
+        $cn -> exec( 'SET NAMES UTF8' );
         // on définit que le jeu de caractères utilisés pour les échanges entre la base de données et PDO est bien UTF8
     } catch( PDOException $e ) { // on attrape l'exception dans une variable e qui contient l'erreur produite
         die( $e -> getMessage() ); // quand on a un objet, pour accéder à ses propriétés ou méthodes publiques, on utilise une ->
@@ -38,11 +38,11 @@ PDOStatement pour les requêtes
     if( !in_array( $a .'_' . $e , $routes ) ) {
         die( 'Cette route n’est pas permise' );
     }
-    
+
     include( 'controllers/' . $e . 'Controller.php' );
 
 
     $datas = call_user_func( $a );
-
+    // on trouve les deux clés créées dans indexBooks dans $datas
 
     include( 'views/view.php' );
