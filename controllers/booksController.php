@@ -11,7 +11,7 @@
 
         public function index() {
             $data[ 'page_title' ] = 'ebooks - liste des livres';
-            $data[ 'books' ] = $this -> books_model -> getRows();
+            $data[ 'books' ] = $this -> books_model -> all();
             $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php'; // = views/indexBooks.php
             // on crée un tableau avec deux clés, books et view
             return $data;
@@ -21,7 +21,7 @@
             if( isset( $_GET[ 'id' ] ) ) {
                 $id = intval( $_GET[ 'id' ] ); // intval => pour être sûr qu'on ait un entier
 
-                $data[ 'book' ] = $this -> books_model -> getRow( $id );
+                $data[ 'book' ] = $this -> books_model -> find( $id );
                 $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
                 return $data;
             } else {

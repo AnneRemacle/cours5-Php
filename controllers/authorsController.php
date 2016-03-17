@@ -10,7 +10,7 @@
         public function index() {
 
             $data[ 'page_title' ] = 'ebooks - liste des auteurs';
-            $data[ 'authors' ] = $this -> authors_model -> getRows();
+            $data[ 'authors' ] = $this -> authors_model -> all();
             $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
             return $data;
         }
@@ -20,7 +20,7 @@
                 $id = intval( $_GET[ 'id' ] ); // intval => pour être sûr qu'on ait un entier
 
                 $data[ 'page_title' ] = 'ebooks - fiche de' . $data[ 'author' ] -> name;
-                $data[ 'author' ] = $this -> authors_model -> getRow( $id );
+                $data[ 'author' ] = $this -> authors_model -> find( $id );
                 $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
                 return $data;
             } else {
