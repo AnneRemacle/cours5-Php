@@ -24,6 +24,9 @@
             $editor = $this->editors_model->find($id);
             $view = 'showEditors.php';
 
-            return ['editor' => $editor, 'view' => $view, 'page_title' => 'ebooks - ' . $editor->name];
+            return ['editor' => $editor,
+                    'view' => $view,
+                    'page_title' => 'ebooks - ' . $editor->name,
+                    'book' => $book];
         }
     }

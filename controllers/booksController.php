@@ -30,6 +30,7 @@
             $authors = null;
             $editors = null;
 
+
             if( isset( $_GET[ 'with' ]) ) {
                 $with = explode( ',', $_GET[ 'with' ] );
                 if( in_array( 'authors', $with ) ){
@@ -46,7 +47,8 @@
                     'view' => 'showBooks.php',
                     'page_title' => 'ebooks - '.$book->title,
                     'authors' => $authors,
-                    'editors' => $editors
+                    'editors' => $editors,
+                    
                 ];
         }
 

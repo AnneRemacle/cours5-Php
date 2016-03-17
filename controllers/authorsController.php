@@ -2,6 +2,8 @@
     namespace Controller;
 
     use Model\Authors;
+    use Model\Books;
+
     class AuthorsController {
         private $authors_model = null;
 
@@ -26,13 +28,25 @@
                 die('Il manque l‘identifiant de votre livre');
             }
             $id = intval($_GET['id']);
-            $author = $this->authors_model->find($id);
+            $author = $this -> authors_model->find($id);
+            $books = null;
+
+            if( isset( $_GET[ 'with' ]) ) {
+                $with = explode( ',', $_GET[ 'with' ] );
+                if( in_array( 'books', $with ) ){
+                    $books_model = new Books();
+                    $books = $books_model -> getBooksByAuthorId( $author -> id );
+                }
+
+            }
+
             $view = 'showAuthors.php';
 
             return [
                 'author' => $author,
                 'view' => $view,
-                'page_title' => 'la fiche de ' . $author->name
+                'page_title' => 'la fiche de ' . $author->name,
+                'books' => $books
             ];
         }
     }
