@@ -8,8 +8,8 @@
         public function getEditorsByBookId( $id ) {
             $sql = 'SELECT editors.*
                     FROM editors
-                    JOIN editor_book ON editor.id = editor_book.editor_id
-                    JOIN books ON editor_book.book_id = books.id
+                    JOIN books
+                    ON editor_id = editors.id
                     WHERE books.id = :id';
 
             $pdoSt = $this -> cn -> prepare( $sql );
