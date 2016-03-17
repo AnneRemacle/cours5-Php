@@ -1,20 +1,11 @@
 <?php
-    $viewsDir = __DIR__ . '/views';
-    $modelsDir = __DIR__ . '/models';
-    $controllerDir = __DIR__ . '/controllers';
-
-    set_include_path( __DIR__ . '/controllers' . PATH_SEPARATOR . __DIR__ . '/models' . PATH_SEPARATOR . get_include_path() );
-
-    spl_autoload_register( function( $class ) {
-        include( $class . '.php' ); // on fait un include d'un fichier sur base du nom du fichier
-    } );
+    require 'vendor/autoload.php';
 
 /*
 Pour exécuter des req sql avec php, différentes fonctions sont disponibles:
 la classe PDO qui représente la connexion
 PDOStatement pour les requêtes
 */
-
     include( 'routes.php' );
 
     $a = isset( $_REQUEST[ 'a' ] ) ? $_REQUEST[ 'a' ] : 'index'; // request = méta tableau qui regroupe get et post
@@ -25,7 +16,7 @@ PDOStatement pour les requêtes
         die( 'Cette route n’est pas permise' );
     }
 
-    $controller_name = ucfirst( $e ) . 'Controller'; // ucfirst met en uppercase la premiere lettre
+    $controller_name = '\Controller\\' . ucfirst( $e ) . 'Controller'; // ucfirst met en uppercase la premiere lettre
     $controller = new $controller_name();
 
     $datas = call_user_func( [ $controller, $a ] ); // on donne un contexte à $a pour qu'elle fonctionne

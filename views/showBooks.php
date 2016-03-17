@@ -12,6 +12,30 @@
     </div>
 <?php endif; ?>
 
+<?php if( $datas[ 'authors' ] ): ?>
+    <ul class="authors">
+        <?php foreach( $datas[ 'authors' ] as $author ): ?>
+            <li class="author">
+                <a href="?a=show&e=authors&id=<?php echo $author -> id; ?>&with=books">
+                    <?php echo $author -> name; ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<?php if( $datas[ 'editors' ] ): ?>
+    <ul class="editors">
+        <?php foreach( $datas[ 'editors' ] as $editor ): ?>
+            <li class="editor">
+                <a href="?a=show&e=authors&id=<?php echo $editor -> id; ?>&with=books">
+                    <?php echo $editor -> name; ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
 <div>
     <a href="index.php">Tous les livres</a>
 </div>

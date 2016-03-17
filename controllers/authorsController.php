@@ -1,5 +1,7 @@
 <?php
+    namespace Controller;
 
+    use Model\Authors;
     class AuthorsController {
         private $authors_model = null;
 
@@ -9,22 +11,28 @@
 
         public function index() {
 
-            $data[ 'page_title' ] = 'ebooks - liste des auteurs';
-            $data[ 'authors' ] = $this -> authors_model -> all();
-            $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
-            return $data;
+            $authors = $this->authors_model->all();
+            $view = 'indexAuthors.php';
+
+            return [
+                'authors' => $authors,
+                'view' => $view,
+                'page_title' => 'Tous les auteurs - ebooks'
+            ];
         }
 
         public function show() {
-            if( isset( $_GET[ 'id' ] ) ) {
-                $id = intval( $_GET[ 'id' ] ); // intval => pour être sûr qu'on ait un entier
-
-                $data[ 'page_title' ] = 'ebooks - fiche de' . $data[ 'author' ] -> name;
-                $data[ 'author' ] = $this -> authors_model -> find( $id );
-                $data[ 'view' ] = 'views/' . $GLOBALS[ 'a'] . $GLOBALS[ 'e'] . '.php';
-                return $data;
-            } else {
-                die( 'Il manque l’id' );
+            if (!isset($_GET['id'])) {
+                die('Il manque l‘identifiant de votre livre');
             }
+            $id = intval($_GET['id']);
+            $author = $this->authors_model->find($id);
+            $view = 'showAuthors.php';
+
+            return [
+                'author' => $author,
+                'view' => $view,
+                'page_title' => 'la fiche de ' . $author->name
+            ];
         }
     }
