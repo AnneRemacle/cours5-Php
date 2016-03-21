@@ -20,4 +20,15 @@
             $pdoSt -> execute( [ ':id' => $id ] );
             return $pdoSt -> fetchAll();
         }
+
+        public function getBooksByEditorId( $id ) {
+            $sql = 'SELECT books.*
+                    FROM books
+                    JOIN editors ON editors.id = books.editor_id
+                    WHERE editors.id = :id';
+
+            $pdoSt = $this -> cn -> prepare( $sql );
+            $pdoSt -> execute( [ ':id' => $id ] );
+            return $pdoSt -> fetchAll();
+        }
     }

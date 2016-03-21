@@ -23,6 +23,19 @@
     </ul>
 <?php endif; ?>
 
+<h2>Éditeurs ayant publié cet auteur</h2>
+<?php if( $datas[ 'editors' ] ): ?>
+    <ul class="editors">
+        <?php foreach( $datas[ 'editors' ] as $editor ): ?>
+            <li class="editor">
+                <a href="?a=show&e=editors&id=<?php echo $editor -> id; ?>&with=books">
+                    <?php echo $editor -> name; ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
 <div>
     <a href="index.php?a=index&e=authors">Tous les auteurs</a>
 </div>

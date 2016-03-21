@@ -30,7 +30,7 @@
     <ul class="editors">
         <?php foreach( $datas[ 'editors' ] as $editor ): ?>
             <li class="editor">
-                <a href="?a=show&e=authors&id=<?php echo $editor -> id; ?>&with=books">
+                <a href="?a=show&e=editors&id=<?php echo $editor -> id; ?>&with=books">
                     <?php echo $editor -> name; ?>
                 </a>
             </li>
