@@ -24,6 +24,7 @@
 <?php endif; ?>
 
 <h2>Éditeurs ayant publié cet auteur</h2>
+
 <?php if( $datas[ 'editors' ] ): ?>
     <ul class="editors">
         <?php foreach( $datas[ 'editors' ] as $editor ): ?>

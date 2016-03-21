@@ -3,6 +3,7 @@
 
     use Model\Editors;
     use Model\Books;
+    use Model\Authors;
 
     class EditorsController {
         private $editors_model = null;

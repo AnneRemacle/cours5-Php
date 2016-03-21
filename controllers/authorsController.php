@@ -3,7 +3,7 @@
 
     use Model\Authors;
     use Model\Books;
-    use Mode\Editors;
+    use Model\Editors;
 
     class AuthorsController {
         private $authors_model = null;
@@ -43,14 +43,13 @@
             if( isset( $_GET[ 'with' ] ) ) {
                 $with = explode( ',', $_GET[ 'with' ] );
                 if( in_array( 'editors', $with ) ) {
-                    $editors_model = new Editor();
+                    $editors_model = new Editors();
                     $editors = $editors_model -> getEditorsByAuthorId( $author -> id );
                 }
             }
             }
 
             $view = 'showAuthors.php';
-
             return [
                 'author' => $author,
                 'view' => $view,
@@ -58,5 +57,6 @@
                 'books' => $books,
                 'editors' => $editors
             ];
+
         }
     }
